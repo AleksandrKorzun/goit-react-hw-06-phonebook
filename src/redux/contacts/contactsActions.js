@@ -12,6 +12,7 @@ import { createAction, nanoid } from "@reduxjs/toolkit";
 //     payload: {...payload, id: uuidv4()}
 // })
 export const addItemsActionCreator = createAction("items/addItems", (item) => ({
+    
     payload: {...item, id: nanoid()}
 }));
 

@@ -40,7 +40,7 @@ const ContactsListItem = () => {
 export default ContactsListItem;
 
 ContactsListItem.propTypes = {
-    filter: PropTypes.string.isRequired,
+    // filter: PropTypes.string.isRequired,
     contacts: PropTypes.array,
     name: PropTypes.string,
     number: PropTypes.string,

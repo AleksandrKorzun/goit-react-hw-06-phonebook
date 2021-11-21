@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import PhonebookInput from './PhoneBookInput/PhonebookInput';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {addItemsActionCreator} from '../../redux/contacts/contactsActions'
 
 const Phonebook = () => {
@@ -8,6 +8,7 @@ const Phonebook = () => {
         name: '',
         number: ''
     });
+    const items = useSelector(state=> state.contacts.items)
     const dispatch = useDispatch()
     const onChangeInpuntName = (e) => {
         const {name, value} = e.target
@@ -15,8 +16,15 @@ const Phonebook = () => {
     }
     const onSubmitContacts = (e) => {
         e.preventDefault();
-        dispatch(addItemsActionCreator(contact))
-        setContact({name: "", number: ""}) 
+        const checkContacts = items.some((contact)=>{
+            return contact.name.trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase()
+        }) 
+        if (!checkContacts){
+            dispatch(addItemsActionCreator(contact))
+            setContact({name: "", number: ""}) 
+        } else {
+            alert(`${name} is already in contacts`)
+        } 
     }
     
     const {name, number} = contact
